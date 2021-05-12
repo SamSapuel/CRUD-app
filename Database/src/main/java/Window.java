@@ -22,11 +22,13 @@ public class Window {
     private JButton createButton;
     private JButton deleteButton;
     private JButton updateButton;
+    private JButton readButton;
     private JPanel TablePanel;
     private JTable tableEmployees;
     private JScrollPane TableScrollPanel;
     private EmployeeService employeeService = new EmployeeService();
     private List employeeList;
+    private JFrame jFrame;
 
     public Window() {
 
@@ -47,64 +49,113 @@ public class Window {
         updateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                for (Employees employee : employeeService.findAllEmployees()) {
+                    int id = Integer.parseInt(textFieldId.getText());
+                    if (id == employee.getId()) {
+                        employee.setName(textFieldName.getText());
+                        employee.setSurname(textFieldSurname.getText());
+                        employee.setCountry(textFieldCountry.getText());
+                        employee.setCity(textFieldCity.getText());
+                        employee.setStreet(textFieldStreet.getText());
+                        EmployeesDao.update(employee);
+                    }
+                }
             }
         });
         deleteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                //EmployeesDao employeesDao = new EmployeesDao();
+                //EmployeeService employeeService = new EmployeeService();
+                //textFieldId.getText();
+                //employeeService.findAllEmployees();
+                for (Employees employee : employeeService.findAllEmployees()) {
+                    int id = Integer.parseInt(textFieldId.getText());
+                    if (id == employee.getId()) {
+                        EmployeesDao.delete(employee);
+                        //break;
+                    }
+                }
             }
         });
 
 
+        readButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                JFrame tableFrame = new JFrame("Employees");
+                tableEmployees = new JTable();
+                tableFrame.setSize(new Dimension(500, 500));
+                tableFrame.setMinimumSize(new Dimension(400, 400));
+                tableFrame.setLocationRelativeTo(null);
+                tableFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+                tableFrame.add(tableEmployees);
+                try {
+                    FillData();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                } catch (ClassNotFoundException classNotFoundException) {
+                    classNotFoundException.printStackTrace();
+                }
+                tableFrame.setVisible(true);
+
+            }
+        });
     }
 
-    public void start() throws SQLException, ClassNotFoundException {
-        FillData();
-        JFrame jFrame = new JFrame();
-        jFrame.setSize(new Dimension(900, 900));
-        jFrame.setMinimumSize(new Dimension(900, 900));
-        jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        jFrame.add(new Window().Values);
+    public static void start() throws SQLException, ClassNotFoundException {
 
+        JFrame jFrame = new JFrame("Employee");
+        jFrame.setSize(new Dimension(400, 400));
+        jFrame.setMinimumSize(new Dimension(400, 400));
+        jFrame.setResizable(false);
+        jFrame.setLocationRelativeTo(null);
+        jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        jFrame.getContentPane().add(new Window().Values);
         jFrame.setVisible(true);
+
 
     }
 
 
     private void FillData() throws SQLException, ClassNotFoundException {
-
         ArrayList<Employees> employeesList = new ArrayList<>();
         DefaultTableModel defaultTableModel = new DefaultTableModel();
-         defaultTableModel.addColumn("PersonalID");
-         defaultTableModel.addColumn("Name");
-         defaultTableModel.addColumn("Surname");
-         defaultTableModel.addColumn("Country");
-         defaultTableModel.addColumn("City");
-         defaultTableModel.addColumn("Street");
+        defaultTableModel.addColumn("PersonalID");
+        defaultTableModel.addColumn("Name");
+        defaultTableModel.addColumn("Surname");
+        defaultTableModel.addColumn("Country");
+        defaultTableModel.addColumn("City");
+        defaultTableModel.addColumn("Street");
         for (Employees employees : this.employeeService.findAllEmployees()) {
-        //Employees employees = new Employees(1, "Dmitriy", "Shevchenko", "Cz", "Praha", "Ulice12345");
+            //Employees employees = new Employees(1, "Dmitriy", "Shevchenko", "Cz", "Praha", "Ulice12345");
             defaultTableModel.addRow(new Object[]{employees.getId(), employees.getName(), employees.getSurname(), employees.getCountry(), employees.getCity(), employees.getStreet()});
 
 
         }
+
         tableEmployees.setModel(defaultTableModel);
+        //tableEmployees.setFillsViewportHeight(true);
+        //Values.add(tableEmployees);
+        //TableScrollPanel.setViewportView(tableEmployees);
         //TablePanel.repaint();
 
     }
-    /** Maybe its variant to realize the table
-    ArrayList<Employees> employeesList = new ArrayList<>();
-    DefaultTableModel defaultTableModel = new DefaultTableModel(new String[]{"PersonalID", "Name", "Surname", "Country", "City", "Street"}, 0);
-        Class.forName("org.postgresql.Driver");
-    Connection c = DriverManager.getConnection("jdbc:postgresql://slon.felk.cvut.cz:5432/db21_shevcdmi", "db21_shevcdmi", "Sk4KW5");
-    PreparedStatement ps = c.prepareStatement("SELECT * FROM Employees");
-    ResultSet rs = ps.executeQuery();
-     while (rs.next()) {
-        defaultTableModel.addRow(new Object[]{rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)});
-    }
-        tableEmployees.setModel(defaultTableModel);*/
 
+
+    /** Maybe its variant to realize the table
+     ArrayList<Employees> employeesList = new ArrayList<>();
+     DefaultTableModel defaultTableModel = new DefaultTableModel(new String[]{"PersonalID", "Name", "Surname", "Country", "City", "Street"}, 0);
+     Class.forName("org.postgresql.Driver");
+     Connection c = DriverManager.getConnection("jdbc:postgresql://slon.felk.cvut.cz:5432/db21_shevcdmi", "db21_shevcdmi", "Sk4KW5");
+     PreparedStatement ps = c.prepareStatement("SELECT * FROM Employees");
+     ResultSet rs = ps.executeQuery();
+     while (rs.next()) {
+     defaultTableModel.addRow(new Object[]{rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)});
+     }
+     tableEmployees.setModel(defaultTableModel);*/
     {
 // GUI initializer generated by IntelliJ IDEA GUI Designer
 // >>> IMPORTANT!! <<<
@@ -121,9 +172,9 @@ public class Window {
      */
     private void $$$setupUI$$$() {
         final JPanel panel1 = new JPanel();
-        panel1.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), -1, -1));
+        panel1.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
         Values = new JPanel();
-        Values.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(7, 3, new Insets(0, 0, 0, 0), -1, -1));
+        Values.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(8, 3, new Insets(0, 0, 0, 0), -1, -1));
         panel1.add(Values, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         textFieldSurname = new JTextField();
         textFieldSurname.setText("");
@@ -169,10 +220,10 @@ public class Window {
         deleteButton = new JButton();
         deleteButton.setText("Delete");
         Values.add(deleteButton, new com.intellij.uiDesigner.core.GridConstraints(6, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        TableScrollPanel = new JScrollPane();
-        panel1.add(TableScrollPanel, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-        TableScrollPanel.setBorder(BorderFactory.createTitledBorder(null, "Table", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
-        tableEmployees = new JTable();
-        TableScrollPanel.setViewportView(tableEmployees);
+        readButton = new JButton();
+        readButton.setText("Table");
+        Values.add(readButton, new com.intellij.uiDesigner.core.GridConstraints(7, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
+
+
 }

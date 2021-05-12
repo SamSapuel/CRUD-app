@@ -9,7 +9,7 @@
         <!-- Entities managed by the persistence unit -->
         <class>Model.Employees</class>
         <class>Model.Office</class>
-        <!--<class>Model.Office.Work</class> -->
+        <class>Model.Work</class>
 
         <properties>
             <!-- database connection with postrgresql -->

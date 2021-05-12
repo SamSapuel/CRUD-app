@@ -1,25 +1,57 @@
 package Model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "Work")
-public class Work {
+public class Work implements Serializable{
+
     @Id
+    //@JoinColumn(referencedColumnName = "PersonalID")
+    @Column(name = "Employee")
     private int employee;
 
     @Id
-    private int office;
+    //@JoinColumn(referencedColumnName = "Department")
+    @Column(name = "Department")
+    private int department;
+
+    //@JoinColumn(referencedColumnName = "Chair_number")
+    @Column(name = "Chair_number")
+    private int chairNumber;
+
+    //@JoinColumn(referencedColumnName = "Cabinet_number")
+    @Column(name = "Cabinet_number")
+    private int cabinetNumber;
+
 
     public Work() {
 
     }
 
-    public Work(int employee, int office) {
+    public Work(int employee, int department, int chairNumber, int cabinetNumber) {
         this.employee = employee;
-        this.office = office;
+        this.department = department;
+        this.chairNumber = chairNumber;
+        this.cabinetNumber = cabinetNumber;
+    }
+
+    public int getChairNumber() {
+        return chairNumber;
+    }
+
+    public void setChairNumber(int chairNumber) {
+        this.chairNumber = chairNumber;
+    }
+
+    public int getCabinetNumber() {
+        return cabinetNumber;
+    }
+
+    public void setCabinetNumber(int cabinetNumber) {
+        this.cabinetNumber = cabinetNumber;
     }
 
     public long getEmployee() {
@@ -30,11 +62,11 @@ public class Work {
         this.employee = employee;
     }
 
-    public long getOffice() {
-        return office;
+    public long getDepartment() {
+        return department;
     }
 
-    public void setOffice(int office) {
-        this.office = office;
+    public void setDepartment(int department) {
+        this.department = department;
     }
 }

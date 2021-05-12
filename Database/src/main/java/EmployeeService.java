@@ -28,10 +28,6 @@ public class EmployeeService {
     public List<Employees> findAllEmployees() {
         return employeesDao.findAll();
     }
-    /**
-    public Office findById(int id) {
-        return EmployeesDao.findOfficeById(id);
-    }*/
 
 }
 

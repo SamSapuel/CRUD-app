@@ -34,7 +34,9 @@ public class OfficeDao {
     }
 
     public static List<Office> findAll() {
-        List<Office> offices = (List<Office>) HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("From Office ").list();
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        List<Office> offices = (List<Office>) session.createQuery("From Office ").list();
+        session.close();
         return offices;
 
     }

@@ -3,11 +3,12 @@ package Model;
 import Model.Office;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table (name = "Employees")
-public class Employees {
+public class Employees implements Serializable {
     @Id
     @Column(name = "PersonalID")
     private int personalId;
@@ -23,6 +24,7 @@ public class Employees {
     @Column(name = "Street")
     private String street;
     @ManyToMany(mappedBy = "employees")
+    //@JoinTable(name = "Office", joinColumns = @JoinColumn(name = "department"))
     private List<Office> offices;
 
     public Employees() {

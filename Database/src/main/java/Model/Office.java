@@ -1,13 +1,14 @@
 package Model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 
 
 @Entity
 @Table(name = "Office")
-public class Office {
+public class Office implements Serializable {
     @Id
     @Column(name = "Department")
     private int department;
@@ -23,7 +24,7 @@ public class Office {
     @Column(name = "Street")
     private String street;
     @ManyToMany
-    @JoinTable(name = "Work", joinColumns = @JoinColumn(name = "Department"), inverseJoinColumns = @JoinColumn(name = "PersonalID"))
+    @JoinTable(name = "Work", joinColumns = @JoinColumn(name = "department"), inverseJoinColumns = @JoinColumn(name = "employee"))
     private List<Employees> employees;
 
     public Office() {
