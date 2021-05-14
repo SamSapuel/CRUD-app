@@ -23,9 +23,13 @@ public class Office implements Serializable {
     private String city;
     @Column(name = "Street")
     private String street;
+    @Column(name = "Employee")
+    private int employee;
     @ManyToMany
-    @JoinTable(name = "Work", joinColumns = @JoinColumn(name = "department"), inverseJoinColumns = @JoinColumn(name = "employee"))
+    //@JoinTable(name = "Work", joinColumns = @JoinColumn(name = "department"), inverseJoinColumns = @JoinColumn(name = "employee"))
     private List<Employees> employees;
+
+
 
     public Office() {
 
@@ -37,6 +41,13 @@ public class Office implements Serializable {
         this.country = country;
         this.city = city;
         this.street = street;
+    }
+    public int getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(int employee) {
+        this.employee = employee;
     }
 
     public List<Employees> getEmployees() {

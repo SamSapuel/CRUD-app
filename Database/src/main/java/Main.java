@@ -59,10 +59,8 @@ public class Main implements ActionListener {
         JPanel panel = new JPanel();
         JButton employees = new JButton("Employees Table");
         JButton offices = new JButton("Offices Table");
-        JButton works = new JButton("Works Table");
         employees.addActionListener(this);
         offices.addActionListener(this);
-        works.addActionListener(this);
 
         jFrame.setSize(new Dimension(200, 200));
         jFrame.setMinimumSize(new Dimension(200, 200));
@@ -70,7 +68,6 @@ public class Main implements ActionListener {
         jFrame.setLocationRelativeTo(null);
         panel.add(employees);
         panel.add(offices);
-        panel.add(works);
         jFrame.add(panel);
         jFrame.setVisible(true);
     }
@@ -91,10 +88,6 @@ public class Main implements ActionListener {
         }
         if (action.equals("Offices Table")) {
             Window2.start();
-            jFrame.dispose();
-        }
-        if (action.equals("Works Table")) {
-            Window3.start();
             jFrame.dispose();
         }
     }

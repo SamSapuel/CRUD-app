@@ -44,11 +44,23 @@ public class Window {
                 employee.setStreet(textFieldStreet.getText());
                 EmployeesDao.save(employee);
 
+                JOptionPane optionPane = new JOptionPane();
+                JOptionPane.showMessageDialog(optionPane, "Check the table!");
+                JButton okButton = new JButton("Ok");
+                okButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        optionPane.setVisible(false);
+                    }
+                });
+                optionPane.add(okButton);
+
             }
         });
         updateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                boolean find = false;
                 for (Employees employee : employeeService.findAllEmployees()) {
                     int id = Integer.parseInt(textFieldId.getText());
                     if (id == employee.getId()) {
@@ -58,13 +70,38 @@ public class Window {
                         employee.setCity(textFieldCity.getText());
                         employee.setStreet(textFieldStreet.getText());
                         EmployeesDao.update(employee);
+                        find = true;
+
+                        JOptionPane optionPane = new JOptionPane();
+                        JOptionPane.showMessageDialog(optionPane, "Check the table!");
+                        JButton okButton = new JButton("Ok");
+                        okButton.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                optionPane.setVisible(false);
+                            }
+                        });
+                        optionPane.add(okButton);
                     }
+                }
+                if (!find) {
+                    JOptionPane optionPane = new JOptionPane();
+                    JOptionPane.showMessageDialog(optionPane, "Employee with Id " + textFieldId.getText() + " doesnt exist, try again!");
+                    JButton okButton = new JButton("Ok");
+                    okButton.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            optionPane.setVisible(false);
+                        }
+                    });
+                    optionPane.add(okButton);
                 }
             }
         });
         deleteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                boolean find = false;
                 //EmployeesDao employeesDao = new EmployeesDao();
                 //EmployeeService employeeService = new EmployeeService();
                 //textFieldId.getText();
@@ -73,8 +110,33 @@ public class Window {
                     int id = Integer.parseInt(textFieldId.getText());
                     if (id == employee.getId()) {
                         EmployeesDao.delete(employee);
+                        find = true;
+
+                        JOptionPane optionPane = new JOptionPane();
+                        JOptionPane.showMessageDialog(optionPane, "Check the table!");
+                        JButton okButton = new JButton("Ok");
+                        okButton.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                optionPane.setVisible(false);
+                            }
+                        });
+                        optionPane.add(okButton);
+
                         //break;
                     }
+                }
+                if (!find) {
+                    JOptionPane optionPane = new JOptionPane();
+                    JOptionPane.showMessageDialog(optionPane, "Employee with Id " + textFieldId.getText() + " doesnt exist, try again!");
+                    JButton okButton = new JButton("Ok");
+                    okButton.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            optionPane.setVisible(false);
+                        }
+                    });
+                    optionPane.add(okButton);
                 }
             }
         });
@@ -89,7 +151,7 @@ public class Window {
                 tableFrame.setSize(new Dimension(500, 500));
                 tableFrame.setMinimumSize(new Dimension(400, 400));
                 tableFrame.setLocationRelativeTo(null);
-                tableFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+                tableFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
                 tableFrame.add(tableEmployees);
                 try {
                     FillData();
