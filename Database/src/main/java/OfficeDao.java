@@ -5,6 +5,10 @@ import org.hibernate.Transaction;
 
 import java.util.List;
 
+/**
+ * Main methods for entity Office which we use with the help of HibernateSessionFactoryUtil
+ */
+
 public class OfficeDao {
     public static Office findOfficeById(int id) {
         return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(Office.class, id);

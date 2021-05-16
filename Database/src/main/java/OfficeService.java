@@ -3,6 +3,10 @@ import Model.Office;
 
 import java.util.List;
 
+/**
+ * Its like interface of OfficeDao
+ */
+
 public class OfficeService {
 
     private OfficeDao officeDao = new OfficeDao();

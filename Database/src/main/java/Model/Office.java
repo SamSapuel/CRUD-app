@@ -4,7 +4,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
-
+/**
+ * Entity Office class
+ */
 
 @Entity
 @Table(name = "Office")

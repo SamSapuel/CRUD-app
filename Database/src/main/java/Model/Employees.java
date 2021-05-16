@@ -6,6 +6,10 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * Entity Employee class
+ */
+
 @Entity
 @Table (name = "Employees")
 public class Employees implements Serializable {

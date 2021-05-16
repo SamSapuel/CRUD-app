@@ -3,6 +3,10 @@ import Model.Office;
 
 import java.util.List;
 
+/**
+ * Its like interface for EmployeesDao
+ */
+
 public class EmployeeService {
 
     private EmployeesDao employeesDao = new EmployeesDao();

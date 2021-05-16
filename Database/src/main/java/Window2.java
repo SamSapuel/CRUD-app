@@ -10,6 +10,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
+/**
+ * GUI of Office entity
+ */
+
 public class Window2 {
     private JTextField textFieldCabinetNumber;
     private JTextField textFieldCountry;
@@ -28,6 +32,11 @@ public class Window2 {
 
 
     public Window2() {
+        /**
+         * Buttons which represent CRUD model in our app
+         */
+
+        //Create
         createButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -77,6 +86,8 @@ public class Window2 {
 
             }
         });
+
+        //Update
         updateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -124,6 +135,8 @@ public class Window2 {
                 }
             }
         });
+
+        //Delete
         deleteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -146,7 +159,6 @@ public class Window2 {
                         });
                         optionPane.add(okButton);
 
-                        //break;
                     }
                 }
                 if (!find) {
@@ -163,6 +175,8 @@ public class Window2 {
                 }
             }
         });
+
+        //Read
         readButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -185,6 +199,7 @@ public class Window2 {
         });
     }
 
+    // Advanced settings for a table
     private void FillData() throws SQLException, ClassNotFoundException {
 
         DefaultTableModel defaultTableModel = new DefaultTableModel();

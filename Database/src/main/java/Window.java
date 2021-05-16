@@ -11,6 +11,10 @@ import java.awt.event.ActionListener;
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * GUI of Employees entity
+ */
+
 public class Window {
     private JTextField textFieldName;
     private JTextField textFieldSurname;
@@ -32,6 +36,11 @@ public class Window {
 
     public Window() {
 
+        /**
+         * Buttons which represent CRUD model in our app
+         */
+
+        // Create
         createButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -57,6 +66,8 @@ public class Window {
 
             }
         });
+
+        //Update
         updateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -98,6 +109,8 @@ public class Window {
                 }
             }
         });
+
+        //Delete
         deleteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -141,7 +154,7 @@ public class Window {
             }
         });
 
-
+        // Read
         readButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -181,7 +194,7 @@ public class Window {
 
     }
 
-
+    // Advanced settings for a table
     private void FillData() throws SQLException, ClassNotFoundException {
         ArrayList<Employees> employeesList = new ArrayList<>();
         DefaultTableModel defaultTableModel = new DefaultTableModel();

@@ -5,6 +5,10 @@ import org.hibernate.Transaction;
 
 import java.util.List;
 
+/**
+ * Main methods for entity Employees which we use with the help of HibernateSessionFactoryUtil
+ */
+
 public class EmployeesDao {
     public static Employees findById(long id) {
         return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(Employees.class, id);
@@ -32,11 +36,7 @@ public class EmployeesDao {
         tx1.commit();
         session.close();
     }
-    /**
-    public static Office findOfficeById(long id) {
-        return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(Office.class, id);
 
-    }*/
     public static List<Employees> findAll() {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         List<Employees> employees = (List<Employees>) session.createQuery("FROM Employees").list();
