@@ -15,7 +15,7 @@ public class EmployeeService {
 
     }
 
-    public Employees findEmployee(long id) {
+    public Employees findEmployee(int id) {
         return employeesDao.findById(id);
     }
 

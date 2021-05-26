@@ -10,8 +10,11 @@ import java.util.List;
  */
 
 public class EmployeesDao {
-    public static Employees findById(long id) {
-        return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(Employees.class, id);
+    public static Employees findById(int id) {
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        Employees employee = session.get(Employees.class, id);
+        session.close();
+        return employee;
 
     }
 

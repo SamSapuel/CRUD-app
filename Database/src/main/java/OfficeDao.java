@@ -1,4 +1,3 @@
-import Model.Employees;
 import Model.Office;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -44,6 +43,4 @@ public class OfficeDao {
         return offices;
 
     }
-
-
 }

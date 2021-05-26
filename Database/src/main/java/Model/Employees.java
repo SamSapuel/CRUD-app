@@ -4,6 +4,7 @@ import Model.Office;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,6 +31,7 @@ public class Employees implements Serializable {
     @ManyToMany(mappedBy = "employees")
     //@JoinTable(name = "Office", joinColumns = @JoinColumn(name = "department"))
     private List<Office> offices;
+
 
     public Employees() {
     }
